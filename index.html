@@ -1,0 +1,1227 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>視光實驗二 考前手冊</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: 頂部固定分頁 → 每個分頁一欄閱讀；考試頁加一條黏性工具列（計時＋進度＋階段跳轉）。
+   色彩取自紅綠視標：紅 / 綠只用在「紅綠測試、紅點白點」等語意上，主色是儀器藍綠。 */
+:root{
+  --bg:#edf2f2; --surface:#ffffff; --sunk:#e2e9ea; --ink:#13242b; --muted:#55696f; --line:#cdd8da;
+  --accent:#0d6573; --accent-soft:#d4e9ec;
+  --fin:#7a3d8c; --fin-soft:#efe2f3;
+  --red:#b3362b; --red-soft:#f7e0dc; --green:#1b7a46; --green-soft:#daefe2;
+  --amber:#93600f; --amber-soft:#f6e9d0;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --navh:56px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1518; --surface:#142026; --sunk:#1a2a31; --ink:#e3ebed; --muted:#93a6ac; --line:#2a3b42;
+    --accent:#56b7c3; --accent-soft:#173840;
+    --fin:#c792dc; --fin-soft:#33223b;
+    --red:#ee7468; --red-soft:#3b1f1c; --green:#55c98f; --green-soft:#16332a;
+    --amber:#e2a84c; --amber-soft:#3a2c15;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d1518; --surface:#142026; --sunk:#1a2a31; --ink:#e3ebed; --muted:#93a6ac; --line:#2a3b42;
+  --accent:#56b7c3; --accent-soft:#173840;
+  --fin:#c792dc; --fin-soft:#33223b;
+  --red:#ee7468; --red-soft:#3b1f1c; --green:#55c98f; --green-soft:#16332a;
+  --amber:#e2a84c; --amber-soft:#3a2c15;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(var(--navh) + 120px)}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.75;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+h1,h2,h3,h4{line-height:1.3;text-wrap:balance;margin:0}
+p{margin:0}
+.rx{font-family:var(--f-mono);font-weight:500;font-size:.92em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.en{font-family:var(--f-mono);font-size:.78em;letter-spacing:.04em;color:var(--muted);font-weight:500}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+/* ---------- top nav ---------- */
+.topnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.topnav .in{max-width:1100px;margin:0 auto;height:var(--navh);display:flex;align-items:center;gap:16px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;white-space:nowrap;font-size:17px}
+.brand .lens{width:22px;height:22px;border-radius:50%;background:linear-gradient(90deg,var(--red) 0 50%,var(--green) 50% 100%);box-shadow:inset 0 0 0 3px var(--surface),0 0 0 1.5px var(--ink)}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto;min-width:0}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{display:block;padding:6px 12px;border-radius:999px;color:var(--muted);text-decoration:none;font-weight:500;white-space:nowrap;font-size:15px}
+.tabs a:hover{color:var(--ink);background:var(--sunk)}
+.tabs a[aria-current="page"]{background:var(--ink);color:var(--surface)}
+@media (max-width:720px){
+  .brand .txt{display:none}
+  .topnav .in{gap:10px}
+  .tabs{margin-left:0}
+  .tabs a{padding:6px 10px;font-size:14px}
+}
+
+/* ---------- page frame ---------- */
+main{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 80px}
+.view{display:grid;gap:36px;grid-template-columns:minmax(0,1fr)}
+.view > *{min-width:0}
+.eyebrow{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.lead{display:grid;gap:10px;max-width:760px}
+.lead h1{font-size:clamp(28px,4.4vw,42px);font-weight:900;letter-spacing:.01em}
+.lead p{color:var(--muted);font-size:17px}
+section > h2{font-size:22px;font-weight:900;margin-bottom:14px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+
+/* ---------- overview ---------- */
+.exams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:760px){.exams{grid-template-columns:1fr}}
+.exam-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:14px;border-top:5px solid var(--accent)}
+.exam-card.fin{border-top-color:var(--fin)}
+.exam-card h3{font-size:24px;font-weight:900;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.exam-card .min{font-family:var(--f-mono);font-size:30px;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+.exam-card.fin .min{color:var(--fin)}
+.exam-card .min small{font-size:14px;color:var(--muted);margin-left:4px;font-family:var(--f-body)}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:15px}
+.facts dt{color:var(--muted)}
+.facts dd{margin:0}
+.btn{display:inline-flex;align-items:center;gap:6px;justify-content:center;padding:9px 16px;border-radius:10px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:700;text-decoration:none;color:var(--ink);font-size:15px}
+.btn:hover{background:var(--sunk)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.btn.primary.fin{background:var(--fin);border-color:var(--fin)}
+.btn.primary:hover{filter:brightness(1.08)}
+.countdown{font-size:14px;color:var(--fin);font-weight:700}
+
+/* flow diagram */
+.flowwrap{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;overflow-x:auto}
+.flow{display:grid;grid-template-columns:minmax(96px,auto) minmax(150px,1fr) minmax(150px,1fr);gap:8px 12px;min-width:460px;align-items:stretch}
+.flow .h{font-family:var(--f-mono);font-weight:600;text-align:center;color:var(--muted);font-size:14px}
+.flow .lab{font-size:13px;color:var(--muted);display:flex;align-items:center;line-height:1.35}
+.node{border-radius:10px;padding:8px 12px;font-weight:700;text-align:center;border:1.5px solid var(--accent);background:var(--accent-soft);font-size:15px;line-height:1.4}
+.node small{display:block;font-weight:400;font-size:12.5px;color:var(--muted)}
+.node.f{border-color:var(--fin);background:var(--fin-soft)}
+.node.span{grid-column:2 / span 2}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;margin-top:14px;color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:6px;border:1.5px solid var(--accent);background:var(--accent-soft)}
+.legend i.f{border-color:var(--fin);background:var(--fin-soft)}
+
+.rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.rule{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.rule b{font-size:19px;font-weight:900}
+.rule .ctx{font-size:12.5px;color:var(--muted);font-family:var(--f-mono);letter-spacing:.03em}
+.rule p{font-size:14.5px;color:var(--muted);line-height:1.6}
+.rule.fin{border-left:4px solid var(--fin)}
+.r{color:var(--red);font-weight:700}
+.g{color:var(--green);font-weight:700}
+
+.twocol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:760px){.twocol{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:12px;align-content:start;min-width:0}
+.panel h3{font-size:18px;font-weight:900}
+ol.plain,ul.plain{margin:0;padding-left:1.3em;display:grid;gap:6px}
+.pit li::marker{color:var(--red)}
+
+/* ---------- exam toolbar ---------- */
+.toolbar{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--navh));z-index:15;background:var(--bg);padding-block:10px;margin-top:-10px;display:grid;gap:10px;border-bottom:1px solid var(--line)}
+.tbrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.timer{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px 6px 4px 14px}
+.timer .t{font-family:var(--f-mono);font-size:24px;font-weight:600;min-width:4.2ch;font-variant-numeric:tabular-nums}
+.timer.warn .t{color:var(--amber)}
+.timer.over .t{color:var(--red)}
+.timer button{border:0;background:var(--sunk);border-radius:8px;padding:6px 12px;cursor:pointer;font-weight:700;font-size:14px}
+.timer button:hover{background:var(--line)}
+.prog{flex:1;min-width:160px;display:grid;gap:4px;font-size:13px;color:var(--muted)}
+.bar{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden}
+.bar > span{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .3s}
+.fin-view .bar > span{background:var(--fin)}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin;padding-bottom:2px}
+.chips button{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:3px 12px;font-size:13.5px;cursor:pointer;white-space:nowrap;color:var(--muted)}
+.chips button:hover{color:var(--ink);border-color:var(--ink)}
+.chips button.done{color:var(--green);border-color:var(--green)}
+
+/* ---------- steps ---------- */
+.phase{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px;display:grid;gap:14px;min-width:0;grid-template-columns:minmax(0,1fr)}
+.phase.newp{border-color:var(--fin);box-shadow:inset 4px 0 0 var(--fin)}
+.phase header{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.phase .no{font-family:var(--f-mono);font-weight:600;font-size:13px;color:var(--surface);background:var(--ink);border-radius:6px;padding:1px 8px;letter-spacing:.03em}
+.phase h3{font-size:20px;font-weight:900}
+.say{border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 10px 10px 0;font-size:15.5px}
+.say::before{content:"指導語";display:block;font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.1em}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.step{display:grid;grid-template-columns:28px minmax(0,1fr);gap:4px 10px;align-items:start;padding:8px 8px;border-radius:10px}
+.step:hover{background:var(--sunk)}
+.step input{appearance:none;-webkit-appearance:none;width:22px;height:22px;border:2px solid var(--line);border-radius:6px;margin:3px 0 0;cursor:pointer;display:grid;place-items:center;background:var(--surface)}
+.step input:checked{background:var(--green);border-color:var(--green)}
+.step input:checked::after{content:"";width:6px;height:11px;border:solid var(--surface);border-width:0 2.5px 2.5px 0;transform:translateY(-1px) rotate(45deg)}
+.step label{cursor:pointer;min-width:0}
+.step input:checked + label{color:var(--muted)}
+.step .n{font-family:var(--f-mono);font-weight:600;color:var(--accent);margin-right:6px;font-size:14px}
+.sub{grid-column:2;margin:2px 0 0;padding-left:1.1em;display:grid;gap:4px;font-size:15px;color:var(--ink)}
+.tag{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:0 7px;margin-left:6px;vertical-align:2px;line-height:1.7;white-space:nowrap}
+.tag.rec{background:var(--accent-soft);color:var(--accent)}
+.tag.warn{background:var(--amber-soft);color:var(--amber)}
+.tag.new{background:var(--fin-soft);color:var(--fin)}
+.tag.bad{background:var(--red-soft);color:var(--red)}
+.tag.ok{background:var(--green-soft);color:var(--green)}
+details.more{border-top:1px dashed var(--line);padding-top:10px}
+details.more summary{cursor:pointer;font-weight:700;color:var(--accent);font-size:15px;list-style:none;display:flex;align-items:center;gap:6px}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"+";font-family:var(--f-mono);width:18px;height:18px;border-radius:5px;border:1.5px solid currentColor;display:inline-grid;place-items:center;font-size:13px;line-height:1}
+details.more[open] summary::before{content:"−"}
+.morebody{display:grid;gap:12px;margin-top:12px;font-size:15px}
+.choice{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:640px){.choice{grid-template-columns:1fr}}
+.choice > div{border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:6px;align-content:start;min-width:0}
+.choice h4{font-size:16px;font-weight:900}
+.choice ol{margin:0;padding-left:1.3em;display:grid;gap:4px;font-size:15px}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{padding:7px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--sunk);font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--f-mono);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* record sheet */
+.sheet{border:1.5px solid var(--ink);border-radius:6px;overflow:hidden;font-size:14.5px;background:var(--surface)}
+.sheet .hd{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));border-bottom:1.5px solid var(--ink)}
+.sheet .hd span{padding:6px 10px;border-right:1px solid var(--line);color:var(--muted)}
+.sheet .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:560px){.sheet .grid{grid-template-columns:1fr}}
+.sheet .cell{padding:8px 12px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);display:grid;gap:2px;min-width:0}
+.sheet .cell b{font-size:14px}
+.sheet .cell .rx{white-space:normal}
+.sheet .cell.f b{color:var(--fin)}
+
+/* ---------- tests ---------- */
+.jump{display:flex;flex-wrap:wrap;gap:8px}
+.jump button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 14px;cursor:pointer;font-size:14.5px}
+.jump button:hover{border-color:var(--ink)}
+.jump button .k{font-size:11.5px;color:var(--muted);margin-left:6px}
+.test{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:16px;min-width:0;grid-template-columns:minmax(0,1fr)}
+.test > header{display:grid;gap:6px}
+.test h3{font-size:22px;font-weight:900;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px}
+.meta3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:760px){.meta3{grid-template-columns:1fr}}
+.meta3 > div{background:var(--sunk);border-radius:10px;padding:10px 14px;font-size:14.5px;min-width:0}
+.meta3 h4,.blk h4{font-size:12.5px;letter-spacing:.1em;color:var(--muted);font-weight:700;margin-bottom:4px}
+.blk{display:grid;gap:6px;min-width:0}
+.blk ol,.blk ul{margin:0;padding-left:1.3em;display:grid;gap:5px}
+.ex{font-family:var(--f-mono);font-size:14px;background:var(--sunk);border-radius:8px;padding:10px 14px;display:grid;gap:3px;overflow-x:auto}
+.ex span{white-space:pre}
+.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:760px){.split{grid-template-columns:1fr}}
+.calc{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;background:var(--accent-soft);border-radius:10px;padding:12px 16px}
+.calc label{font-weight:700}
+.calc input{width:5.5em;font:inherit;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.calc output{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* 3D demo */
+.demo{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--sunk);display:grid;grid-template-columns:minmax(0,1fr)}
+.stage{position:relative;aspect-ratio:16/7.5;max-width:100%;min-height:200px}
+.stage canvas{display:block;width:100%!important;height:100%!important}
+.stage .ph{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-size:14px;text-align:center;padding:16px}
+.stage .side{position:absolute;bottom:8px;font-family:var(--f-mono);font-size:12px;color:var(--muted);font-weight:600;pointer-events:none}
+.stage .side.l{left:18%}.stage .side.r{right:18%}
+.stage .view-note{position:absolute;top:8px;left:12px;font-size:12px;color:var(--muted);pointer-events:none}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px;padding:10px 12px;background:var(--surface);border-top:1px solid var(--line);align-items:center}
+.ctrl button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:5px 12px;cursor:pointer;font-size:14px;font-weight:500}
+.ctrl button:hover{background:var(--sunk)}
+.ctrl button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.ctrl .sep{width:1px;align-self:stretch;background:var(--line)}
+.ctrl select{font:inherit;font-size:14px;padding:5px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.caption{padding:10px 14px;background:var(--surface);border-top:1px solid var(--line);font-size:14.5px;min-height:3.2em}
+.caption b{color:var(--accent)}
+
+/* course */
+.grade{display:flex;height:40px;border-radius:10px;overflow:hidden;font-size:13.5px;font-weight:700}
+.grade span{display:grid;place-items:center;color:var(--surface);min-width:0;white-space:nowrap;overflow:hidden}
+.foot{color:var(--muted);font-size:13.5px;border-top:1px solid var(--line);padding-top:16px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<nav class="topnav" aria-label="主選單">
+  <div class="in">
+    <div class="brand"><span class="lens" aria-hidden="true"></span><span class="txt">視光實驗（二）</span></div>
+    <div class="tabs">
+      <a href="#overview" data-view="overview">總覽</a>
+      <a href="#midterm" data-view="midterm">期中考</a>
+      <a href="#final" data-view="final">期末考</a>
+      <a href="#tests" data-view="tests">其他小檢查</a>
+      <a href="#course" data-view="course">課程與規範</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+<!-- ================= 總覽 ================= -->
+<div class="view" id="v-overview">
+  <div class="lead">
+    <span class="eyebrow">Optometry Laboratory II · 呂婉榕 老師</span>
+    <h1>視光實驗（二）考前手冊</h1>
+    <p>把期中考、期末考的考試流程整理成可以勾選的步驟清單，其他小檢查（AA / NPA / NPC、EOM、視野、遮蓋測試）另外分類。內容依照上課講義與「期中 / 期末考程序與注意事項」整理。</p>
+  </div>
+
+  <section>
+    <h2>兩次實驗考</h2>
+    <div class="exams">
+      <article class="exam-card">
+        <h3>期中考 <span class="min">18<small>分鐘</small></span></h3>
+        <dl class="facts">
+          <dt>日期</dt><dd>10/20、10/27（現場抽籤，分 2 梯）</dd>
+          <dt>佔分</dt><dd>40%</dd>
+          <dt>範圍</dt><dd>雙眼檢影 → 單眼 1st MPMVA → JCC → 2nd MPMVA</dd>
+          <dt>閱讀</dt><dd>Clinical Procedures 5th p.73–88；視光臨床實務 p.131–148</dd>
+        </dl>
+        <a class="btn primary" href="#midterm">看期中考完整流程</a>
+      </article>
+      <article class="exam-card fin">
+        <h3>期末考 <span class="min">25<small>分鐘</small></span></h3>
+        <dl class="facts">
+          <dt>日期</dt><dd>12/15、12/22（9:10 集合）</dd>
+          <dt>佔分</dt><dd>40%</dd>
+          <dt>範圍</dt><dd>期中全部 ＋ 雙眼平衡 ＋ 雙眼 MPMVA</dd>
+          <dt>閱讀</dt><dd>Clinical Procedures 5th p.73–88；視光臨床實務 p.130–155、162–164</dd>
+        </dl>
+        <p class="countdown" id="countdown" hidden></p>
+        <a class="btn primary fin" href="#final">看期末考完整流程</a>
+      </article>
+    </div>
+    <p class="muted small" style="margin-top:10px">本課程不補考。考試要自備電池或檢影鏡。</p>
+  </section>
+
+  <section>
+    <h2>自覺式驗光流程 <span class="en">SUBJECTIVE REFRACTION</span></h2>
+    <div class="flowwrap">
+      <div class="flow">
+        <span></span><span class="h">OD 右眼</span><span class="h">OS 左眼</span>
+        <span class="lab">第 1 步<br>雙眼一起</span><div class="node">Auto / Ret<small>檢影＋工作距離</small></div><div class="node">Auto / Ret<small>檢影＋工作距離</small></div>
+        <span class="lab">第 2 步右眼<br>第 3 步左眼</span><div class="node">1st MPMVA<small>霧視 → 最佳 VA → 紅綠</small></div><div class="node">1st MPMVA<small>霧視 → 最佳 VA → 紅綠</small></div>
+        <span class="lab">散光</span><div class="node">JCC<small>APA / PPAP</small></div><div class="node">JCC<small>APA / PPAP</small></div>
+        <span class="lab">確認球面</span><div class="node">2nd MPMVA<small>先把 JCC 退掉</small></div><div class="node">2nd MPMVA<small>先把 JCC 退掉</small></div>
+        <span class="lab">雙眼打開</span><div class="node f span">Binocular balance 雙眼平衡<small>垂直稜鏡分離法 / 紅綠視標稜鏡分離法</small></div>
+        <span class="lab"></span><div class="node f span">OU MPMVA 雙眼 MPMVA</div>
+      </div>
+      <div class="legend"><span><i></i>期中考範圍</span><span><i class="f"></i>期末考新增（期末考考全部）</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>口訣速查</h2>
+    <div class="rules">
+      <div class="rule"><span class="ctx">檢影 RET</span><b>順加逆減</b><p>順動加正鏡片、逆動加負。先找與光條最平行的反射光定軸。</p></div>
+      <div class="rule"><span class="ctx">1st MPMVA</span><b>霧視 +1.00D</b><p>0.6 視標要看不清楚才算霧視。之後一片一片給 −0.25D，每片約進步一行。</p></div>
+      <div class="rule"><span class="ctx">紅綠測試</span><b><span class="r">紅</span>清楚加負，<span class="g">綠</span>清楚加正</b><p>紅清楚或一樣：加 −0.25D；綠清楚：加 +0.25D。JCC 前要調到<span class="g">綠色第一片清楚</span>。</p></div>
+      <div class="rule"><span class="ctx">JCC 分流</span><b>≥ −0.75DC → APA</b><p>無散光或小於 −0.75DC → PPAP。沒有散光時要先給 −0.25DC。</p></div>
+      <div class="rule"><span class="ctx">JCC 軸度 A</span><b>追<span class="r">紅點</span></b><p>A 對軸，翻轉比較，軸度往紅點的方向轉，直到兩面一樣。</p></div>
+      <div class="rule"><span class="ctx">JCC 度數 P</span><b><span class="r">紅</span>加白減</b><p>紅點在 P 上較清楚 → 多一片 −0.25DC；白點較清楚 → 少一片 −0.25DC。</p></div>
+      <div class="rule"><span class="ctx">等價球面</span><b>散光 −0.50 ↔ 球面 +0.25</b><p>散光增加 −0.50DC → 球面給 +0.25DS；散光減少 −0.50DC → 球面給 −0.25DS。</p></div>
+      <div class="rule fin"><span class="ctx">期末 · 平衡方法</span><b>視力相等 → 垂直稜鏡</b><p>雙眼 2nd MPMVA 視力相等：垂直稜鏡分離法；不相等：紅綠視標稜鏡分離法。</p></div>
+      <div class="rule fin"><span class="ctx">期末 · 垂直稜鏡</span><b>OD 3△BU、OS 3△BD</b><p>右眼影像在下、左眼影像在上。哪一行比較清楚，就給那隻眼 +0.25D。</p></div>
+      <div class="rule fin"><span class="ctx">期末 · 稜鏡影像</span><b>影像往頂點跑</b><p>BU → 影像往下；BD → 往上；BO → 往內；BI → 往外。</p></div>
+    </div>
+  </section>
+
+  <div class="twocol">
+    <section class="panel">
+      <h3>什麼時候要寫紀錄</h3>
+      <ol class="plain">
+        <li>兩眼 RET 結束＋工作距離 → <b>度數＋VA</b></li>
+        <li>1st MPMVA → <b>度數＋VA</b>，之後再做紅綠到綠邊清楚<br><span class="tag warn" style="margin-left:0">寫的不是「綠邊第一片清楚」的度數</span></li>
+        <li>JCC 結束 → <b>度數</b></li>
+        <li>2nd MPMVA → <b>度數＋最佳 VA</b></li>
+        <li class="muted">期末另加：雙眼平衡度數、OU MPMVA 度數＋VA</li>
+      </ol>
+    </section>
+    <section class="panel">
+      <h3>老師點名的常見錯誤</h3>
+      <ul class="plain pit">
+        <li>1st MPMVA 之後<b>忘記做紅綠檢查</b>。</li>
+        <li>2nd MPMVA 前<b>忘記把 JCC 移開</b>。</li>
+        <li>右眼做完沒換：做右眼時遮左眼，做左眼時要改遮右眼。</li>
+        <li>檢影掃完右眼就關右眼。要直接掃左眼，提醒 PT 雙眼一直睜開。</li>
+        <li>用了 pinhole（PH）沒轉開就開始自覺式驗光。</li>
+        <li>檢影鏡燈開太亮，PT 縮瞳更難掃；要用發散光。</li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<!-- ================= 期中考 / 期末考 (由 JS 產生) ================= -->
+<div class="view" id="v-midterm" hidden></div>
+<div class="view fin-view" id="v-final" hidden></div>
+
+<!-- ================= 其他小檢查 ================= -->
+<div class="view" id="v-tests" hidden>
+  <div class="lead">
+    <span class="eyebrow">Other clinical tests</span>
+    <h1>其他小檢查</h1>
+    <p>依講義分類。標有「實驗三考試進度」的項目是給視光實驗（三）的範圍；視野測試是本學期的個人作業（10%）。</p>
+  </div>
+  <div class="jump" id="testjump">
+    <button data-go="t-aa">AA 調節幅度<span class="k">實驗三</span></button>
+    <button data-go="t-npa">NPA 近點調節<span class="k">實驗三</span></button>
+    <button data-go="t-npc">NPC 近點聚合<span class="k">實驗三</span></button>
+    <button data-go="t-eom">EOM 眼外肌運動<span class="k">實驗三</span></button>
+    <button data-go="t-vf">視野測試<span class="k">作業</span></button>
+    <button data-go="t-ct">遮蓋測試 Cover Test<span class="k">實驗三</span></button>
+    <button data-go="t-clock">散光鐘面圖<span class="k">驗光補充</span></button>
+    <button data-go="t-dom">主利眼測試<span class="k">期末用</span></button>
+  </div>
+
+  <!-- AA -->
+  <article class="test" id="t-aa">
+    <header>
+      <h3>AA 調節幅度 <span class="en">ACCOMMODATION AMPLITUDE</span><span class="tag new">實驗三考試進度</span></h3>
+      <p class="muted">單眼。推進法（push-up）。單位 D = 1 ÷ 近點距離（m）。年齡增加、水晶體彈性下降，調節幅度變差（老花）。</p>
+    </header>
+    <div class="meta3">
+      <div><h4>器材</h4>近用視力表 / 近用壓舌棒、PD 尺 / 捲尺、遮眼棒</div>
+      <div><h4>設置</h4>椅子高度讓雙方視軸成一直線；Px 戴<b>遠用</b>矯正；明亮光線</div>
+      <div><h4>注意</h4>每眼測 3 次，若低於第一次數值表示疲勞。兩眼差應在 1D 內。</div>
+    </div>
+    <div class="blk"><h4>步驟</h4>
+      <ol>
+        <li>確認近用視標在 40 cm，Px 戴矯正工具，先遮<b>左眼</b>。</li>
+        <li>開 Px 最佳視標的上一行單一字體，請 Px 雙眼張開放輕鬆。</li>
+        <li>先測右眼：請 Px 注視視標，慢慢往 Px 推近，「視標模糊時告訴我」。</li>
+        <li>說模糊時請 Px 眨眨眼（用更多調節力），「眨完眼後是否仍持續模糊」→ 記錄距離。</li>
+        <li>換左眼，重複 2–4 → 記錄距離。</li>
+      </ol>
+    </div>
+    <div class="split">
+      <div class="blk"><h4>紀錄範例</h4><div class="ex"><span>Amp (PU), OD 7D  OS 7D.</span></div></div>
+      <div class="blk"><h4>預期值 Hofstetter 公式</h4>
+        <ul><li>最小 = 15 − 0.25 × 年齡</li><li>平均 = 18.5 − 0.30 × 年齡</li><li>最大 = 25 − 0.40 × 年齡</li></ul>
+      </div>
+    </div>
+    <div class="calc">
+      <label for="age">輸入年齡試算</label><input id="age" type="number" min="5" max="80" value="20" inputmode="numeric">
+      <span>最小 <output id="aMin"></output></span><span>平均 <output id="aAvg"></output></span><span>最大 <output id="aMax"></output></span>
+      <span class="muted small">近點距離 ≈ <output id="aCm"></output>（以平均值換算）</span>
+    </div>
+  </article>
+
+  <!-- NPA -->
+  <article class="test" id="t-npa">
+    <header>
+      <h3>NPA 近點調節 <span class="en">NEAR POINT OF ACCOMMODATION</span><span class="tag new">實驗三考試進度</span></h3>
+      <p class="muted">雙眼。推進法，單位 D。步驟和 AA 相同，但不遮眼。</p>
+    </header>
+    <div class="meta3">
+      <div><h4>器材</h4>近用視力表 / 近用壓舌棒、PD 尺 / 捲尺</div>
+      <div><h4>設置</h4>同 AA，雙眼打開</div>
+      <div><h4>注意</h4>同樣測 3 次，低於第一次數值即為疲勞</div>
+    </div>
+    <div class="blk"><h4>步驟</h4>
+      <ol>
+        <li>確認近用視標 40 cm，Px 戴矯正工具。</li>
+        <li>開 Px 最佳視標的上一行單一字體，請 Px 雙眼張開放輕鬆。</li>
+        <li>請 Px 注視視標，慢慢往 Px 推近，「視標模糊時告訴我」。</li>
+        <li>說模糊時請 Px 眨眼，「眨完眼後是否仍持續模糊」→ 記錄距離。</li>
+      </ol>
+    </div>
+    <div class="blk"><h4>紀錄範例</h4><div class="ex"><span>NPA (PU), OU 8D</span></div></div>
+  </article>
+
+  <!-- NPC -->
+  <article class="test" id="t-npc">
+    <header>
+      <h3>NPC 近點聚合 <span class="en">NEAR POINT OF CONVERGENCE</span><span class="tag new">實驗三考試進度</span></h3>
+      <p class="muted">評估雙眼維持融像時的聚合能力，找出破裂點（break）與回復點（recovery），單位 cm。預期值：Break 5 cm / Recovery 7 cm。</p>
+    </header>
+    <div class="meta3">
+      <div><h4>器材</h4>近用視力表 / 壓舌棒、PD 尺 / 捲尺、筆燈、紅色濾片或紅綠鏡片</div>
+      <div><h4>設置</h4>椅子等高視軸一直線；Px 戴<b>近用</b>矯正；明亮光線</div>
+      <div><h4>何時加做</h4>結果大於 8–10 cm → 改用筆燈＋紅色濾片 / 紅綠鏡片再測</div>
+    </div>
+    <div class="blk"><h4>步驟</h4>
+      <ol>
+        <li>確認近用視標 40 cm，Px 戴矯正工具。</li>
+        <li>開 Px 最佳視標的上一行單一字體，請 Px 雙眼張開放輕鬆。</li>
+        <li>請 Px 注視視標並慢慢推近，「視標變成 2 個時告訴我」→ <b>破裂點</b>。請 Px 閉上眼睛再量距離；同時注意 Px 眼睛是否偏離（沒有注視）。</li>
+        <li>把視標貼近 Px 鼻樑，請 Px 張開雙眼注視，再慢慢拉遠，「視標變回 1 個時告訴我」→ <b>回復點</b>。</li>
+        <li>數據大於 8–10 cm：Px 戴矯正工具並加上紅色濾片或紅綠鏡片。</li>
+        <li>重複 2–4，視標改成筆燈，找出破裂點與回復點。</li>
+      </ol>
+    </div>
+    <div class="blk"><h4>紀錄範例</h4>
+      <div class="ex">
+        <span>NPC cc (acc.) — TTN.                    To the nose</span>
+        <span>NPC sc (light) 10 cm/12 cm OS out, suppression.   Px 說沒看到 2 個，但你觀察到破裂</span>
+        <span>NPC (RG) 15 cm/20 cm OS out, suppression.        紅綠鏡片</span>
+        <span>NPC sc (acc.) 8 cm/10 cm OS out, suppression.    調節視標</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- EOM -->
+  <article class="test" id="t-eom">
+    <header>
+      <h3>EOM 眼外肌運動測試 <span class="en">EXTRAOCULAR MOTILITIES</span><span class="tag new">實驗三考試進度</span></h3>
+      <p class="muted">評估受測者兩眼協同轉動的能力。亮室檢查，環境亮度要能看到角膜反光點。器材：筆燈、兩支不同顏色的筆。</p>
+    </header>
+
+    <div class="demo" data-demo="eom">
+      <div class="stage"><div class="ph">3D 示意載入中…</div><span class="view-note">檢查者視角（面對受測者）</span><span class="side l">OD 右眼</span><span class="side r">OS 左眼</span></div>
+      <div class="ctrl">
+        <button data-act="pursuit" aria-pressed="false">播放 追蹤：H 字 9 方位</button>
+        <button data-act="saccade" aria-pressed="false">播放 躍視：1A↔1B…4A↔4B</button>
+        <button data-act="stop">停止</button>
+      </div>
+      <p class="caption" aria-live="polite">按「播放」看雙眼如何跟著筆燈移動。畫面是從檢查者看受測者的角度，所以受測者的右眼在畫面左邊。</p>
+    </div>
+
+    <div class="split">
+      <div class="blk"><h4>追蹤 Pursuit · 步驟</h4>
+        <ol>
+          <li>受測者拿掉眼鏡，檢查者手持筆燈。</li>
+          <li>請受測者眼睛跟著燈光，頭不要動。</li>
+          <li>告知若燈光變成兩個，或過程中有疼痛、不適，要說出來。</li>
+          <li>從受測者正前方開始，這是「初始眼位」（primary position of gaze）。</li>
+          <li>把燈移到其他位置，順序不重要，重點是 <b>9 個注視位置都要測到</b>，可以描一個大 H。</li>
+          <li>筆燈距離約 30–40 cm，不要移太遠，各象限約 40°。</li>
+          <li>全程觀察：眼球運動流暢度、跟隨精確度、移動範圍。</li>
+          <li>任何方位出現複視 → 用紅色鏡片再測；右眼做完雙 H 後，再觀察左眼做一次雙 H。</li>
+        </ol>
+      </div>
+      <div class="blk"><h4>躍視 Saccades · 步驟</h4>
+        <ol>
+          <li>受測者戴慣用眼鏡，檢查者手持兩支筆。</li>
+          <li>檢查者與受測者平視，相距約 1 m。</li>
+          <li>頭不動，眼球依指示注視指定視標，各方位分別檢查。</li>
+          <li>起始眼位都從正前方開始。</li>
+          <li>視標距受測者 40 cm，兩支筆放在檢查者視野邊緣。</li>
+          <li>筆的位置：左 1A / 右 1B、上 2A / 下 2B、左上 3A / 右下 3B、右上 4A / 左下 4B。</li>
+          <li>先注視前方（檢查者的鼻子）→ 躍視到 1A → 1B → 回到前方。觀察流暢度與準確度。</li>
+          <li>重複 7，檢查其他方位。</li>
+        </ol>
+      </div>
+    </div>
+    <div class="split">
+      <div class="blk"><h4>追蹤紀錄：SAFE</h4>
+        <ul>
+          <li><b>S</b>mooth 平穩（無波動）· <b>A</b>ccurate 準確（一直注視視標）· <b>F</b>ull 完整（全視野）· <b>E</b>xtensive 廣泛（達檢查極限）</li>
+          <li>有問題時用描述詞：Jerky、unsteady、nystagmoid、restricted、lagging、failure to follow in to</li>
+          <li>寫出造成複視或不適的注視方向；單眼異常要寫是哪一眼</li>
+        </ul>
+        <div class="ex"><span>EOM: SAFE</span><span>EOM: 注視右上側時複視，右眼滯後</span><span>EOM: SAFE，右眼注視左側時疼痛</span><span>EOM: 注視左側時複視</span></div>
+      </div>
+      <div class="blk"><h4>躍視紀錄</h4>
+        <ul><li>正常：Smooth 平穩、Accurate 準確</li><li>異常：眼球震顫（nystagmus）、滯後（lagging）等</li></ul>
+        <div class="ex"><span>Saccades: Smooth and Accurate</span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- VF -->
+  <article class="test" id="t-vf">
+    <header>
+      <h3>視野測試 <span class="en">VISUAL FIELD</span><span class="tag warn">個人作業 10% · 10/19 12:30 交至系辦</span></h3>
+      <p class="muted">檢測眼睛是否有視野缺損，只對真的有視野缺陷的人有效。器材：遮眼棒、筆燈或手指、3 mm 以下視標或小白球。</p>
+    </header>
+    <div class="split">
+      <div class="blk"><h4>數指視野 Finger counting · 距離 60–80 cm</h4>
+        <ol>
+          <li>受測者拿掉眼鏡，雙方視線等高。光線要亮但不直射雙方眼睛（靠投影機的大燈開，靠投影板的燈關）。</li>
+          <li>受測者閉左眼。</li>
+          <li>告知會在眼前舉出筆燈或 1、2、4（或 5）根手指。</li>
+          <li>檢查者閉右眼，請受測者注視檢查者的左眼，用餘光看手指。</li>
+          <li>在四條子午線、八個方位測試。</li>
+          <li>受測者改閉右眼，重複上述步驟。</li>
+        </ol>
+        <div class="ex"><span>FCF: OD: FULL, OS: FULL</span><span>FCF: OD: Restricted upper right quadrant, OS: FULL</span><span>FCF: OD: FULL, OS: restricted temporally</span></div>
+      </div>
+      <div class="blk"><h4>篩檢視野 Screening · 距離 50 cm</h4>
+        <ol>
+          <li>設置同左。</li>
+          <li>受測者閉左眼。</li>
+          <li>告知會在眼前舉出一根手指（也可以用 3 mm 以下視標或小白球，在眼前 5 cm 當移動目標）。</li>
+          <li>檢查者閉右眼，請受測者注視檢查者的左眼，用餘光看手指擺動。</li>
+          <li>四條子午線、八個方位測試。</li>
+          <li>改閉右眼，重複。</li>
+        </ol>
+        <div class="ex"><span>VF: OD: FULL, OS: FULL</span><span>VF: OD: Restricted upper right quadrant, OS: FULL</span><span>VF: OD: FULL, OS: restricted temporally</span></div>
+      </div>
+    </div>
+    <p class="small muted">紀錄原則：兩眼分開寫，正常寫 FULL，不正常寫 Restricted 並寫出位置。</p>
+  </article>
+
+  <!-- Cover test -->
+  <article class="test" id="t-ct">
+    <header>
+      <h3>遮蓋測試 <span class="en">COVER TEST</span><span class="tag new">實驗三考試進度</span></h3>
+      <p class="muted">客觀檢查，在分離狀態下評估眼位偏斜是否存在、類型和大小，並用稜鏡量化。斜視 = strabismus = heterotropia = tropia；斜位 / 隱斜視 = heterophoria = phoria。</p>
+    </header>
+
+    <div class="demo" data-demo="cover">
+      <div class="stage"><div class="ph">3D 示意載入中…</div><span class="view-note">檢查者視角 · 偏斜幅度放大示意 · 遮眼棒以半透明顯示</span><span class="side l">OD 右眼</span><span class="side r">OS 左眼</span></div>
+      <div class="ctrl">
+        <label for="ctCond" class="small">情境</label>
+        <select id="ctCond">
+          <option value="ortho">正位 Ortho</option>
+          <option value="xp" selected>外斜位 XP（phoria）</option>
+          <option value="ep">內斜位 EP（phoria）</option>
+          <option value="xt">右眼外斜視 RXT（tropia）</option>
+          <option value="et">右眼內斜視 RET（tropia）</option>
+        </select>
+        <span class="sep"></span>
+        <button data-act="cut">播放 遮蓋-不遮蓋</button>
+        <button data-act="act">播放 交替遮蓋</button>
+        <span class="sep"></span>
+        <button data-act="OD">遮右眼</button>
+        <button data-act="OS">遮左眼</button>
+        <button data-act="none">移開</button>
+      </div>
+      <p class="caption" aria-live="polite">選一個情境，按「播放」或手動遮眼，觀察<b>沒被遮的眼</b>和<b>剛移開遮蓋的眼</b>怎麼動。</p>
+      <p class="caption small muted" id="ctKey"></p>
+    </div>
+
+    <div class="meta3">
+      <div><h4>器材</h4>遠用視力表、近用視力表、遮眼棒、筆燈、稜鏡棒 / 稜鏡塊</div>
+      <div><h4>設置</h4>椅子等高；遮眼棒與器材消毒；明亮光線，光源從 Px 後方或上方照視標，不可直射 Px 眼睛；Px 戴矯正工具</div>
+      <div><h4>視標</h4>遠（6 m）：最佳視標上一行單一字體；近（40 cm）：較差視力的上一行單一字體</div>
+    </div>
+    <div class="split">
+      <div class="blk"><h4>1. 遮蓋-不遮蓋 Cover-Uncover · 分辨 tropia / phoria</h4>
+        <ol>
+          <li>確認遠用 6 m / 近用 40 cm 視標，Px 戴矯正工具。</li>
+          <li>開最佳視標上一行單一字體，請 Px 雙眼張開直視前方。先觀察視軸是否對齊。</li>
+          <li>遮右眼 3–4 秒時觀察<b>左眼</b>；遮左眼時觀察<b>右眼</b>。每眼做 2–3 次。</li>
+          <li>兩眼分別被遮時，另一眼<b>都不動</b> → 正位或隱斜視（phoria）。</li>
+          <li>有動 → 斜視（tropia），再分辨<b>單側性</b>或<b>交替性</b>：先遮右眼、再遮左眼，看移開後是由同一眼固定注視（單側性）還是換眼注視（交替性）。</li>
+        </ol>
+      </div>
+      <div class="blk"><h4>2. 交替遮蓋 Alternating Cover · 量方向與大小</h4>
+        <ol>
+          <li>視標設定同上。</li>
+          <li>遮右眼 3–4 秒後<b>迅速</b>換遮左眼，觀察右眼移動方向；反之觀察左眼。來回數次。</li>
+          <li>看眼睛移動方向判斷偏斜（下表）。</li>
+          <li>用稜鏡中和，來回測到眼睛不再移動 = 偏斜量。</li>
+          <li>主要偏移量與次要偏移量相差 ≥ 5△ → 非共動性斜視（noncomitant）。</li>
+        </ol>
+        <p class="small muted">交替遮蓋只能量方向和大小，不能分辨 tropia 或 phoria。</p>
+      </div>
+    </div>
+    <div class="split">
+      <div class="tablewrap"><table>
+        <thead><tr><th>去遮蓋時眼睛移動</th><th>偏斜</th><th>中和稜鏡</th></tr></thead>
+        <tbody>
+          <tr><td>向內移動</td><td>外斜 exo</td><td class="num">BI 基底朝內</td></tr>
+          <tr><td>向外移動</td><td>內斜 eso</td><td class="num">BO 基底朝外</td></tr>
+          <tr><td>向上移動</td><td>下斜 hypo</td><td class="num">BU 基底朝上</td></tr>
+          <tr><td>向下移動</td><td>上斜 hyper</td><td class="num">BD 基底朝下</td></tr>
+        </tbody>
+      </table></div>
+      <div class="blk"><h4>紀錄縮寫</h4>
+        <div class="ex">
+          <span>CT / cover test     sc 裸視  cc 有矯正</span>
+          <span>D 遠方    N 近方（prime 符號 ′）</span>
+          <span>EP 內斜位  XP 外斜位  ET 內斜視  XT 外斜視</span>
+          <span>Hyper / Hypo 垂直偏斜   ⊕ orthophoria</span>
+          <span>L / R 左 / 右   Alt 交替   Int 或 (T) 間歇   Con 恆定</span>
+          <span>Φ 無水平偏斜   ɵ 無垂直偏斜</span>
+        </div>
+        <p class="small"><b>預期值：</b>遠距離 1△ EXO（±2△）；近距離 3△ EXO（±3△）</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- Clock dial -->
+  <article class="test" id="t-clock">
+    <header>
+      <h3>散光鐘面圖 <span class="en">THE CLOCK DIAL</span><span class="tag ok">自覺式驗光補充</span></h3>
+      <p class="muted">初始度數沒有散光，但第一次 MPMVA 後視力不佳（未達 20/20），或他覺式散光度數不準時使用。<b>必須在霧視下做</b>（兩條焦線都要在視網膜前）；JCC 則是非霧視下做。</p>
+    </header>
+    <div class="split">
+      <div class="blk"><h4>步驟</h4>
+        <ol>
+          <li>第一次 MPMVA 完成，沒有初始散光度。</li>
+          <li>先霧視，使視力模糊 2–3 行（約 20/40）。</li>
+          <li>切到鐘面圖給受測者看。</li>
+          <li>請受測者說哪一條線比較黑、清晰。全部一樣 → 再霧視 +0.50D 再問；仍然一樣 → 沒有散光。</li>
+          <li>某一條特別黑 → 用「30 法則」：時鐘數字 × 30 = 軸度，轉到綜合驗光儀上。</li>
+          <li>一次加一片 −0.25DC，請受測者比較所有線條，直到全部一樣黑和清楚 = 散光度數。</li>
+        </ol>
+      </div>
+      <div class="blk"><h4>30 法則範例</h4>
+        <div class="tablewrap"><table>
+          <thead><tr><th>較清楚的方向</th><th>軸度</th></tr></thead>
+          <tbody>
+            <tr><td>1（或 7）點鐘</td><td class="num">1 × 30 = 030</td></tr>
+            <tr><td>3（或 9）點鐘</td><td class="num">3 × 30 = 090</td></tr>
+            <tr><td>1–2（或 7–8）點鐘之間</td><td class="num">1.5 × 30 = 045</td></tr>
+          </tbody>
+        </table></div>
+        <p class="small muted">鐘面圖的軸度不夠精細，建議做完再用 JCC 精確確認。</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- Dominant eye -->
+  <article class="test" id="t-dom">
+    <header>
+      <h3>主利眼（優勢眼）測試 <span class="en">DOMINANT EYE</span><span class="tag new">期末雙眼平衡會用到</span></h3>
+      <p class="muted">垂直稜鏡分離法若兩行無法一樣清楚，以主利眼稍微清楚為原則。期末考紀錄單上有「主利眼：OD / OS」欄位。</p>
+    </header>
+    <ol class="plain">
+      <li>確認受檢者位置與高度，眼睛平面最好與視力表等高，姿勢舒服自然。</li>
+      <li>請受檢者雙手伸直，兩手虎口圍成比拇指大一點的圓孔。</li>
+      <li>維持兩眼張開，慢慢舉起雙手，透過圓孔看視標。</li>
+      <li>看到投影視標後，請受檢者維持姿勢不動。</li>
+      <li>檢查者用遮眼棒輪流遮右眼、左眼。</li>
+      <li>遮住哪一眼時視標<b>不會</b>被遮掉，<b>沒被遮的那一眼</b>就是主利眼。</li>
+    </ol>
+  </article>
+</div>
+
+<!-- ================= 課程與規範 ================= -->
+<div class="view" id="v-course" hidden>
+  <div class="lead">
+    <span class="eyebrow">Course info</span>
+    <h1>課程與規範</h1>
+    <p>週二 10:10–12:00 · 視光實驗室 · 1 學分（單學期）· 擋修視光學實驗（三）</p>
+  </div>
+
+  <section>
+    <h2>成績配比</h2>
+    <div class="grade" role="img" aria-label="出席 10%、作業 10%、期中考 40%、期末考 40%">
+      <span style="flex:10;background:var(--muted)">出席 10</span>
+      <span style="flex:10;background:var(--amber)">作業 10</span>
+      <span style="flex:40;background:var(--accent)">期中考 40</span>
+      <span style="flex:40;background:var(--fin)">期末考 40</span>
+    </div>
+    <p class="small muted" style="margin-top:8px">作業「視野測試」10/19 中午 12:30 繳交至系辦。本課程不補考。</p>
+  </section>
+
+  <section>
+    <h2>授課進度</h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>週</th><th>日期</th><th>授課標題</th><th>考試進度 / 備註</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td class="num">9/8</td><td>人眼檢影鏡複習；AA / NPA / NPC</td><td>期中＋期末；AA 等為實驗三考試進度</td></tr>
+        <tr><td class="num">2</td><td class="num">9/15</td><td>第一次 MPMVA</td><td>期中＋期末；上課 8:30–12:30（9/22 調課至此）</td></tr>
+        <tr><td class="num">3</td><td class="num">9/22</td><td>JCC 散光軸度與度數</td><td>期中＋期末</td></tr>
+        <tr><td class="num">4</td><td class="num">9/29</td><td>JCC ＋ 第二次 MPMVA</td><td>期中＋期末</td></tr>
+        <tr><td class="num">5</td><td class="num">10/6</td><td>視野測試（EOM / VF）</td><td>作業 10%，10/19 12:30 交</td></tr>
+        <tr><td class="num">6</td><td class="num">10/13</td><td>複習與練習：期中考</td><td></td></tr>
+        <tr><td class="num">7–8</td><td class="num">10/20、10/27</td><td><b>期中考</b></td><td>當場抽籤，40%</td></tr>
+        <tr><td class="num">9</td><td class="num">11/3</td><td>雙眼平衡</td><td>期末</td></tr>
+        <tr><td class="num">10</td><td class="num">11/10</td><td>雙眼 MPMVA</td><td>期末；調課至 11/17</td></tr>
+        <tr><td class="num">11</td><td class="num">11/17</td><td>雙眼 MPMVA；眼外肌運動測試</td><td>期末；上課 8:30–12:30；EOM 為實驗三進度</td></tr>
+        <tr><td class="num">12</td><td class="num">11/24</td><td>遮蓋測試</td><td>實驗三考試進度</td></tr>
+        <tr><td class="num">13</td><td class="num">12/1</td><td>Amsler Grid 黃斑部篩檢 &amp; Stereopsis 立體視</td><td>實驗三考試進度（本次未附講義）</td></tr>
+        <tr><td class="num">14</td><td class="num">12/8</td><td>複習與練習：期末考</td><td></td></tr>
+        <tr><td class="num">15–16</td><td class="num">12/15、12/22</td><td><b>期末考</b></td><td>40%，9:10 集合</td></tr>
+        <tr><td class="num">17–18</td><td class="num">12/29、1/5</td><td>彈性學習週</td><td></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <div class="twocol">
+    <section class="panel">
+      <h3>上課規則</h3>
+      <ul class="plain">
+        <li>穿醫事服、包腳趾的鞋。</li>
+        <li>戴隱形眼鏡的同學自備水盒。</li>
+        <li>自備電池或檢影鏡（考試也要）。</li>
+        <li>請假依校方程序辦理；公假與喪假要出具證明，並 e-mail 給呂老師。</li>
+        <li>本課程不補考。</li>
+      </ul>
+    </section>
+    <section class="panel">
+      <h3>實驗教室借用規定（違規計點）</h3>
+      <ol class="plain">
+        <li>2–3 人一組填寫實驗室借用申請表才能進入，沒填被查到計點 1 次。</li>
+        <li>課後練習要穿實驗衣、包腳鞋等上課服裝，違者計點 1 次。</li>
+        <li>練習結束要拔掉電源插頭，違者計點 1 次。</li>
+        <li>練習時禁止在實驗室內飲食，違者計點 1 次。</li>
+        <li class="r">借用物品僅供本人使用，查到違規計點 1 次。</li>
+        <li>累積 3 點者，當學期課後練習時間不得進入該實驗室。</li>
+        <li class="r">蓄意毀損儀器或耗材遺失，借用人須負全部賠償責任。</li>
+      </ol>
+      <p class="small muted">相關事宜要與系上助教、秘書聯繫。</p>
+    </section>
+  </div>
+
+  <section class="panel">
+    <h3>參考書目</h3>
+    <ol class="plain">
+      <li>Clinical Procedures for Ocular Examination (5th ed., 2023), McGraw Hill Education</li>
+      <li>視光臨床實務：眼睛檢測步驟及操作技巧（第五版中譯本），合記</li>
+      <li>Clinical Procedures in Primary Eye Care (5th ed., 2020), Elsevier</li>
+    </ol>
+  </section>
+  <p class="foot">整理自課程講義：課程簡介、AA-NPA-NPC、自覺式驗光（9/15–9/22、9/29、11/3、11/17）、EOM / VF、Cover Test，以及「期中考 / 期末考程序與注意事項」。考試以老師當天公告為準。</p>
+</div>
+</main>
+
+<script>
+(function(){
+"use strict";
+var store={get:function(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+function R(s){return '<span class="rx">'+s+'</span>'}
+function tag(k,t){return '<span class="tag '+k+'">'+t+'</span>'}
+var REC=function(t){return tag('rec',t||'記錄')};
+var WARN=function(t){return tag('warn',t)};
+var NEW=tag('new','期末新增');
+
+/* ---------- 共用步驟資料 ---------- */
+var PHASES=[
+ {id:'prep',no:'前置',title:'前置準備',items:[
+  {t:'儀器消毒、設定 PD、調整水平。'},
+  {t:'確認綜合驗光儀的稜鏡、輔助鏡等已挪開（輔助鏡轉到 O）。'},
+  {t:'雙眼窺孔打開。'},
+  {t:'調整升降桌，讓 PT 的眼睛能輕鬆靠在綜合驗光儀上，並與你的視線等高。'},
+  {t:'切成紅綠大 E 視標（或 20/400）。'},
+  {t:'綜合驗光儀鎖緊，請 PT 額頭輕靠綜合驗光儀。'},
+  {t:'室內燈光微暗。'}
+ ]},
+ {id:'intro',no:'說明',title:'檢測說明',say:'接下來要幫您檢測您眼睛的屈光度數，待會會用一個光照您的眼睛，如果光太亮不舒服要跟我說。在檢測過程中，麻煩您兩眼睜開輕鬆看前方的視標，如果我擋到視標的一半請跟我說，如果視標消失不見也請您跟我說。',items:[
+  {t:'對 PT 說完指導語。'}
+ ]},
+ {id:'ret',no:'1–9',title:'檢影 Retinoscopy',en:'RET',items:[
+  {n:1,t:'檢影鏡的燈不要開太亮（PT 會縮瞳更難掃），記得用<b>發散光</b>。'},
+  {n:2,t:'<b>先掃左眼</b>：逆動 → 可以開始右眼檢影；中和或順動 → 給正鏡片直到變逆動，再開始右眼。'},
+  {n:3,t:'用右眼掃右眼，用左眼掃左眼。'},
+  {n:4,t:'先確認軸度：找與光條最平行的眼底反射光。'},
+  {n:5,t:'第一軸位中和（例如 170），<b>順加逆減</b>。'},
+  {n:6,t:'轉 90° 看第二軸位（例如 080）：',sub:[
+   '狀況一 · <b>逆動</b>：綜合驗光儀軸度轉到 080，用散光度數中和。',
+   '狀況二 · <b>順動</b>：把這個方向當成第一軸位，退掉多餘的球面度數讓它中和，再轉 90°（例如 170），軸度轉到 170，用散光度數中和。'
+  ]},
+  {n:7,t:'右眼掃完直接掃左眼，<b>不要把右眼關起來</b>，提醒 PT 雙眼一直睜開。'},
+  {n:8,t:'依步驟 4–6 完成左眼檢影。'},
+  {n:9,t:'雙眼同時給工作距離度數（直接給在綜合驗光儀上），度數記錄在紙上。'+REC('記錄度數')}
+ ],more:'<p><b>工作距離鏡度</b> = 1 ÷ 工作距離（m）。例如 50 cm → 2.00D、67 cm → 1.50D，從中和度數扣掉。</p>'},
+ {id:'va',no:'10–11',title:'右眼視力',items:[
+  {n:10,t:'把<b>左眼關起來</b>，開始測右眼的最佳視力。'},
+  {n:11,t:'用數字型視標，可以先從 0.6–0.8 這面開始問（以免時間不夠），問到當下最佳視力，寫在紙上的「VA」處。'+REC('記錄 VA')},
+  {t:'視力低於 0.8 → 再用 pinhole 量視力，並註明有用 PH。有用 PH <b>記得轉開</b>再開始自覺式驗光。'+WARN('PH')}
+ ]},
+ {id:'m1',no:'12',title:'右眼 第一次 MPMVA',en:'1st MPMVA',say:'我要用最大正度數得到您最佳視力值。',items:[
+  {n:12,t:'右眼霧視到 0.6 視標模糊（約 +1.00D）。'},
+  {t:'再慢慢一片一片給 −0.25D；接近最佳視力時給兩片鏡片比較（鏡片 1 比較 minus、鏡片 2 比較 plus）。'},
+  {t:'問到當下最佳視力，記錄度數與 VA。'+REC('記錄度數＋VA')},
+  {t:'切紅綠視標，請 PT 先看<span class="g">綠</span>、再看<span class="r">紅</span>、再看<span class="g">綠</span>，比較哪一邊裡面的「字」比較清楚。'},
+  {t:'調整到<span class="g">綠色第一片清楚</span>，再開始 JCC。'+WARN('紀錄寫的不是這片')}
+ ],more:
+  '<p><b>為什麼要霧視：</b>給足夠正度數讓眼睛呈近視狀態，調節一用力影像反而離視網膜更遠，眼睛就會維持放鬆。每加 +0.25D 約降一行（不一定）。</p>'+
+  '<p><b>每給一片 −0.25D 都要確認視力</b>，鼓勵 PT 讀下一排更小的字；視力沒有進步就不要再加負度數，避免過矯。</p>'+
+  '<div class="tablewrap"><table><thead><tr><th>程序（範例 OD，Ret +1.00 −0.50 × 180，VA 0.8）</th><th>度數</th><th>VA</th></tr></thead><tbody>'+
+  '<tr><td>加球面約 +1.00D → 霧視</td><td class="num">+2.00 −0.50 × 180</td><td class="num">0.3</td></tr>'+
+  '<tr><td>降一片 +0.25D</td><td class="num">+1.75 −0.50 × 180</td><td class="num">0.4</td></tr>'+
+  '<tr><td>再降一片</td><td class="num">+1.50 −0.50 × 180</td><td class="num">0.6</td></tr>'+
+  '<tr><td>再降一片</td><td class="num">+1.25 −0.50 × 180</td><td class="num">0.8</td></tr>'+
+  '<tr><td>再降一片</td><td class="num">+1.00 −0.50 × 180</td><td class="num">0.9</td></tr>'+
+  '<tr><td>再降一片（視力沒進步）</td><td class="num">+0.75 −0.50 × 180</td><td class="num">0.9</td></tr>'+
+  '<tr><td><b>1st MPMVA</b></td><td class="num"><b>+1.00 −0.50 × 180</b></td><td class="num">0.9</td></tr></tbody></table></div>'+
+  '<p><b>紅綠檢查</b>（室內燈要偏暗）：用比最佳矯正視力大一行的視標。</p>'+
+  '<ul class="plain"><li><span class="r">紅色邊</span>的字較清楚，或兩邊一樣 → 加一片 −0.25D</li><li><span class="g">綠色邊</span>的字較清楚 → 加一片 +0.25D</li><li>原理：綠光波長短、折射率大，成像在前；紅光成像在後。紅色焦點較靠近視網膜 → 紅較清楚（正度數太多）。</li></ul>'+
+  '<div class="tablewrap"><table><thead><tr><th>紅綠範例（MPMVA +1.00 −0.50 × 180）</th><th>度數</th><th>哪一邊</th></tr></thead><tbody>'+
+  '<tr><td>0.8 視標加紅綠濾片</td><td class="num">+1.00 −0.50 × 180</td><td class="r">紅</td></tr>'+
+  '<tr><td>降一片 +0.25D</td><td class="num">+0.75 −0.50 × 180</td><td class="r">紅</td></tr>'+
+  '<tr><td>再降一片</td><td class="num">+0.50 −0.50 × 180</td><td>一樣</td></tr>'+
+  '<tr><td>加回一片</td><td class="num">+0.75 −0.50 × 180</td><td>一樣</td></tr>'+
+  '<tr><td>再加一片</td><td class="num">+1.00 −0.50 × 180</td><td class="g">綠</td></tr>'+
+  '<tr><td>再降一片</td><td class="num">+0.75 −0.50 × 180</td><td class="g">綠</td></tr></tbody></table></div>'+
+  '<p class="small muted">注意：有人特別偏愛某一顏色（通常是紅）；長者瞳孔小、水晶體吸收短波長，常覺得紅色亮而誤判；辨色力異常者仍可做，但要改說「左邊 / 右邊」。</p>'
+ },
+ {id:'jcc',no:'13',title:'右眼 JCC',en:'JACKSON CROSS CYLINDER',say:'接下來要幫您確認散光軸度與度數。',items:[
+  {n:13,t:'開蜂巢狀視標，或較圓的單一視標（最佳視力上一行大小）。'},
+  {t:'判斷流程：散光 <b>≥ −0.75DC → APA</b>；沒有散光或 <b>&lt; −0.75DC → PPAP</b>（沒有散光時先給 −0.25DC）。'},
+  {t:'<b>APA</b>：',sub:[
+   'A 對軸 → 翻轉比較 → <b>追紅點</b>，追到兩面一樣。',
+   'P 對軸 → <b><span class="r">紅</span>加白減</b>（紅點在 P 上清楚多一片 −0.25DC，白點清楚少一片）。',
+   'A 再確認一次軸度，PT 應該覺得兩面差不多。'
+  ]},
+  {t:'<b>PPAP</b>：',sub:[
+   'P 對四大軸 180、045、090、135，看哪個軸接受散光（紅點在 P 上較清楚 = 接受）。都拒絕 → 直接做 2nd MPMVA。',
+   'P：確認實際需要多少散光（紅加白減）。',
+   'A：轉到該軸，確認精確軸度（追紅點）。',
+   'P：再確認一次散光度數（紅加白減）。'
+  ]},
+  {t:'散光度數增加 −0.50DC → 球面給 +0.25DS；散光減少 −0.50DC → 球面給 −0.25DS（維持等價球面）。'+WARN('別漏')},
+  {t:'JCC 結束，記錄度數。'+REC('記錄度數')}
+ ],more:
+  '<p>JCC 一定要在<b>最佳球面度（綠色第一片清楚）、非霧視</b>下做，且在第一次 MPMVA 完成後進行。</p>'+
+  '<ul class="plain"><li>JCC 由兩個相差 90° 的負、正圓柱鏡組成，常見 ±0.25D、±0.37D、±0.50D。</li><li><span class="r">紅點</span>＝負圓柱鏡軸位（此處屈光度為正）；白點＝正圓柱鏡軸位（此處為負）。</li><li>翻轉兩面時不必改球面，等價球面度數不變。</li></ul>'+
+  '<div class="tablewrap"><table><thead><tr><th>範例：綜合驗光儀 +1.00 −0.50 × 180</th><th>度數</th></tr></thead><tbody>'+
+  '<tr><td>JCC 方位 (1)</td><td class="num">+0.25DS −0.50DC</td></tr><tr><td>相加</td><td class="num">+1.25DS −1.00DC × 180</td></tr>'+
+  '<tr><td>JCC 方位 (2)</td><td class="num">−0.25DS +0.50DC</td></tr><tr><td>相加</td><td class="num">+0.75DS −0.00DC × 180</td></tr></tbody></table></div>'+
+  '<p class="small muted">兩個方位的等價球面都是 +0.75D。</p>'+
+  '<p><b>特別留意</b>：MPMVA 完成且確認沒有散光，但視力仍不佳 → 要注意病理問題或弱視。初始沒有散光但視力不佳，可用 JCC 或<a href="#tests" data-jump="t-clock">鐘面圖</a>確認。</p>'
+ },
+ {id:'m2',no:'14',title:'右眼 第二次 MPMVA',en:'2nd MPMVA',say:'我要用最大正度數得到您最佳視力值。',items:[
+  {n:14,t:'<b>把右眼 JCC 退掉</b>。'+tag('bad','常忘')},
+  {t:'右眼霧視到 0.6 視標模糊（約 20/40–20/60，模糊 2–3 行）。'},
+  {t:'一片一片給 −0.25D，每片約進步一行；接近最佳視力時給兩片鏡片比較。'},
+  {t:'問到最佳視力，記錄度數與 VA。'+REC('記錄度數＋最佳 VA')}
+ ]},
+ {id:'os',no:'15',title:'左眼：重複 11–14',items:[
+  {n:15,t:'把<b>右眼關起來</b>、打開左眼，依步驟 11–14 測左眼：',sub:[
+   '視力（必要時 PH）→ 記錄 VA',
+   '1st MPMVA → 記錄度數＋VA → 紅綠到綠色第一片清楚',
+   'JCC（APA / PPAP）→ 記錄度數',
+   '退掉 JCC → 2nd MPMVA → 記錄度數＋最佳 VA'
+  ]},
+  {only:'final',t:'MPMVA 終點：受測者說其中一片「<b>變黑變小</b>」就結束。例：−1.00 與 −1.25 比較，−1.25 變黑變小 → 選 −1.00。'+NEW}
+ ]},
+ {id:'bal',no:'16',title:'雙眼平衡與雙眼 MPMVA',en:'BINOCULAR BALANCE · OU MPMVA',only:'final',say:'我要平衡您兩隻眼睛的調節。',items:[
+  {n:16,t:'選方法：右眼與左眼 2nd MPMVA 視力<b>相等 → 垂直稜鏡分離法</b>；<b>不相等 → 紅綠視標稜鏡分離法</b>。'},
+  {t:'依選定的方法完成平衡（見下方兩欄），移開稜鏡記錄度數。'+REC('記錄平衡度數')},
+  {t:'進行雙眼 MPMVA（同第一次 MPMVA，雙眼打開），問到最佳視力，記錄度數與 VA。'+REC('記錄度數＋VA')}
+ ],html:
+  '<div class="choice">'+
+  '<div><h4>垂直稜鏡分離法 <span class="en">VPD · 視力相等</span></h4><ol type="a">'+
+  '<li>雙眼打開，兩眼 +1.00D 霧視。</li>'+
+  '<li>確認 0.7 單行視標有點模糊但仍可辨識。</li>'+
+  '<li>「請閉上眼睛。」右眼前放 3△BU，左眼放 3△BD。</li>'+
+  '<li>「請睜開眼睛，是否看到兩行視標？」沒有 → 確認雙眼都打開，再雙眼等量加大稜鏡。</li>'+
+  '<li>調整度數讓上下兩行清晰度差不多：<b>較清楚那一眼給 +0.25D</b>（上方 = 左眼、下方 = 右眼），記錄度數。</li>'+
+  '<li>移開稜鏡，做雙眼 MPMVA，記錄度數與 VA。</li></ol></div>'+
+  '<div><h4>紅綠視標稜鏡分離法 <span class="en">PDD · 視力不等</span></h4><ol type="a">'+
+  '<li>雙眼打開（<b>不需霧視</b>），給最佳視力上一行大小的紅綠視標。</li>'+
+  '<li>「請閉上眼睛。」右眼前放 3△BU，左眼放 3△BD。</li>'+
+  '<li>「請睜開眼睛，是否看到 2 個紅綠視標？」</li>'+
+  '<li>先看<b>下面</b>視標（右眼），調整度數讓紅綠清晰度一樣。</li>'+
+  '<li>再看<b>上面</b>視標（左眼）調到紅綠一樣，再回頭確認下面（右眼）仍一樣。</li>'+
+  '<li>移開稜鏡，記錄度數。</li>'+
+  '<li>做雙眼 MPMVA，記錄度數與 VA。</li></ol></div>'+
+  '</div>',
+ more:
+  '<div class="tablewrap"><table><thead><tr><th>稜鏡基底</th><th>影像位置</th></tr></thead><tbody>'+
+  '<tr><td>BU 基底朝上</td><td>往下（右眼 3△BU → 右眼影像在下方）</td></tr><tr><td>BD 基底朝下</td><td>往上（左眼 3△BD → 左眼影像在上方）</td></tr><tr><td>BO 基底朝外</td><td>往內</td></tr><tr><td>BI 基底朝內</td><td>往外</td></tr></tbody></table></div>'+
+  '<p><b>垂直稜鏡判斷</b>：上方影像較清楚 → 左眼 +0.25D；下方影像較清楚 → 右眼 +0.25D。同一眼已加兩片（+0.50D）仍是同眼較清楚 → 改在<b>對側眼給 −0.25D</b>。無法一樣清楚 → 讓<a href="#tests" data-jump="t-dom">主利眼</a>稍微清楚，或選清晰度比較一致的度數。</p>'+
+  '<div class="tablewrap"><table><thead><tr><th>VPD 範例 1（起始 OD −1.75 / OS −1.75，回答「上面」）</th><th>雙眼度數</th><th>回答</th></tr></thead><tbody>'+
+  '<tr><td>OS 加 +0.25D</td><td class="num">OD −1.75　OS −1.50</td><td>上面</td></tr>'+
+  '<tr><td>OS 再加 +0.25D</td><td class="num">OD −1.75　OS −1.25</td><td>上面</td></tr>'+
+  '<tr><td>同眼已加兩片 → OD 加 −0.25D</td><td class="num">OD −2.00　OS −1.25</td><td>一樣 → 度數不動</td></tr></tbody></table></div>'+
+  '<div class="tablewrap"><table><thead><tr><th>VPD 範例 2 / 3（主利眼 OD）</th><th>雙眼度數</th><th>處理</th></tr></thead><tbody>'+
+  '<tr><td>範例 2：下面較清楚 → OD 加 +0.25D 後變成上面較清楚</td><td class="num">OD −1.50　OS −1.75</td><td>退掉 OD 的 +0.25D，回到 OD −1.75，保持主利眼較清楚</td></tr>'+
+  '<tr><td>範例 3：上面較清楚 → OS 加 +0.25D 後變成下面較清楚</td><td class="num">OD −1.75　OS −1.50</td><td>下面（OD）較清楚，符合主利眼較清楚 → 度數不動</td></tr></tbody></table></div>'+
+  '<div class="tablewrap"><table><thead><tr><th>PDD 範例</th><th>雙眼度數</th><th>看的視標</th><th>回答</th></tr></thead><tbody>'+
+  '<tr><td>起始</td><td class="num">OD +1.75　OS +1.75</td><td>下方（右眼）</td><td class="r">紅較清楚</td></tr>'+
+  '<tr><td>OD 加 −0.25D</td><td class="num">OD +1.50　OS +1.75</td><td>下方（右眼）</td><td>一樣</td></tr>'+
+  '<tr><td>OD 不動</td><td class="num">OD +1.50　OS +1.75</td><td>上方（左眼）</td><td class="r">紅較清楚</td></tr>'+
+  '<tr><td>OS 加 −0.25D</td><td class="num">OD +1.50　OS +1.50</td><td>上方（左眼）</td><td class="r">紅較清楚</td></tr>'+
+  '<tr><td>OS 再加 −0.25D</td><td class="num">OD +1.50　OS +1.25</td><td>上方（左眼）</td><td>一樣</td></tr>'+
+  '<tr><td>再確認</td><td class="num">OD +1.50　OS +1.25</td><td>下方（右眼）</td><td>一樣</td></tr></tbody></table></div>'+
+  '<p class="small">PDD：<span class="r">紅</span>較清楚 → 該眼加 −0.25D；<span class="g">綠</span>較清楚 → 該眼加 +0.25D。（講義上「上面視標」一段寫成右眼，實際調的是左眼。）</p>'+
+  '<p><b>雙眼 MPMVA 終點</b>：紅綠檢查、字體變黑變小（調節介入）、或視力已達 1.0（20/20）以上。</p>'+
+  '<ul class="plain small muted"><li>雙眼平衡要在單眼自覺式驗光完成、雙眼都在 MPMVA 的狀態下做；只調球面，散光度數和軸度不受影響。</li><li>65 歲以上老花不需要平衡（已沒有調節力）。</li><li>兩眼平衡不代表完全矯正，仍可能過矯或矯正不足。</li></ul>'
+ }
+];
+
+var EXAMS={
+ midterm:{name:'期中考',min:18,date:'10/20、10/27 · 現場抽籤',read:'Clinical Procedures 5th p.73–88；視光臨床實務 p.131–148',cls:''},
+ final:{name:'期末考',min:25,date:'12/15、12/22 · 9:10 集合',read:'Clinical Procedures 5th p.73–88；視光臨床實務 p.130–155、162–164',cls:'fin'}
+};
+
+function sheet(exam){
+ var f=exam==='final';
+ var hd='<div class="hd"><span>工作距離：</span><span>受測者：</span>'+(f?'<span>主利眼：OD / OS</span>':'')+'<span>PD：</span><span>Date：</span></div>';
+ function cell(t,va,cls){return '<div class="cell'+(cls?' '+cls:'')+'"><b>'+t+'</b><span class="rx">OD：'+(va?'　　　　VA：':'')+'</span><span class="rx">OS：'+(va?'　　　　VA：':'')+'</span></div>'}
+ var g='<div class="grid">'+cell('① Retinoscopy',1)+cell('③ JCC',0)+cell('② 1st MPMVA',1)+cell('④ 2nd MPMVA',1)+
+  (f?cell('⑤ Binocular balance',0,'f')+cell('⑥ OU MPMVA',1,'f'):'')+'</div>';
+ return '<div class="sheet">'+hd+g+'</div>';
+}
+
+function buildExam(exam){
+ var E=EXAMS[exam], host=document.getElementById('v-'+exam), isF=exam==='final';
+ var list=PHASES.filter(function(p){return !p.only||p.only===exam});
+ var h='';
+ h+='<div class="lead"><span class="eyebrow">'+(isF?'Final exam':'Midterm exam')+' · '+E.min+' min</span><h1>'+E.name+'完整流程</h1>'+
+   '<p>'+E.date+'。指定閱讀：'+E.read+'。'+(isF?'步驟 1–15 與期中考相同，第 15 步多一條終點規則，第 16 步是新增的雙眼平衡與雙眼 MPMVA。':'範圍到兩眼的第二次 MPMVA 為止。')+'</p></div>';
+ h+='<div class="toolbar"><div class="tbrow">'+
+   '<div class="timer" id="tm-'+exam+'"><span class="t">'+E.min+':00</span><button data-t="go">開始</button><button data-t="reset">重設</button></div>'+
+   '<div class="prog"><span id="pg-'+exam+'">已完成 0 / 0</span><div class="bar"><span></span></div></div>'+
+   '<button class="btn" data-clear="'+exam+'" style="padding:6px 12px;font-size:14px">清除勾選</button></div>'+
+   '<div class="chips" aria-label="跳到階段">';
+ list.forEach(function(p){h+='<button data-go="'+exam+'-'+p.id+'">'+p.no+' '+p.title.replace(/^右眼 /,'')+'</button>'});
+ h+='<button data-go="'+exam+'-rec">紀錄</button></div></div>';
+ list.forEach(function(p){
+  var newp=p.only==='final';
+  h+='<section class="phase'+(newp?' newp':'')+'" id="'+exam+'-'+p.id+'"><header><span class="no">'+p.no+'</span><h3>'+p.title+'</h3>'+(p.en?'<span class="en">'+p.en+'</span>':'')+(newp?NEW:'')+'</header>';
+  if(p.say)h+='<p class="say">「'+p.say+'」</p>';
+  h+='<ul class="steps">';
+  p.items.forEach(function(it,i){
+   if(it.only&&it.only!==exam)return;
+   var id=exam+'-'+p.id+'-'+i;
+   h+='<li class="step"><input type="checkbox" id="'+id+'" data-exam="'+exam+'"><label for="'+id+'">'+(it.n?'<span class="n">'+it.n+'.</span>':'')+it.t+'</label>';
+   if(it.sub)h+='<ul class="sub">'+it.sub.map(function(s){return '<li>'+s+'</li>'}).join('')+'</ul>';
+   h+='</li>';
+  });
+  h+='</ul>';
+  if(p.html)h+=p.html;
+  if(p.more)h+='<details class="more"><summary>補充：原理、範例與注意事項</summary><div class="morebody">'+p.more+'</div></details>';
+  h+='</section>';
+ });
+ h+='<section class="phase" id="'+exam+'-rec"><header><span class="no">紀錄</span><h3>紀錄單格式</h3></header>'+sheet(exam)+
+   '<p class="small muted">範例寫法</p><div class="ex"><span>OD: -5.50 -1.00 X 010  VA 1.0-1  PH ____</span><span>OS: -6.00 -1.50 X 180  VA 0.7'+(isF?'-2':'')+'    PH 1.0+1</span></div>'+
+   '<p class="small muted">視力低於 0.8 才需要另外寫 PH 視力。</p></section>';
+ host.innerHTML=h;
+
+ /* checklist persistence */
+ var key='ol2-check-'+exam, saved=store.get(key)||{};
+ var boxes=host.querySelectorAll('input[type=checkbox]');
+ var pg=document.getElementById('pg-'+exam), bar=host.querySelector('.bar > span');
+ function upd(){
+  var n=0;boxes.forEach(function(b){if(b.checked)n++});
+  pg.textContent='已完成 '+n+' / '+boxes.length;
+  bar.style.width=(boxes.length?n/boxes.length*100:0)+'%';
+  list.forEach(function(p){
+   var sec=document.getElementById(exam+'-'+p.id), bs=sec.querySelectorAll('input'), all=bs.length>0;
+   bs.forEach(function(b){if(!b.checked)all=false});
+   var chip=host.querySelector('[data-go="'+exam+'-'+p.id+'"]'); if(chip)chip.classList.toggle('done',all);
+  });
+ }
+ boxes.forEach(function(b){b.checked=!!saved[b.id];b.addEventListener('change',function(){saved[b.id]=b.checked;store.set(key,saved);upd()})});
+ host.querySelector('[data-clear]').addEventListener('click',function(){boxes.forEach(function(b){b.checked=false});saved={};store.set(key,saved);upd()});
+ upd();
+
+ /* timer */
+ var tm=document.getElementById('tm-'+exam), tEl=tm.querySelector('.t'), go=tm.querySelector('[data-t=go]');
+ var total=E.min*60, left=total, run=false, last=0, raf=0;
+ function show(){
+  var s=Math.abs(Math.ceil(left)), m=Math.floor(s/60), ss=s%60;
+  tEl.textContent=(left<0?'+':'')+m+':'+(ss<10?'0':'')+ss;
+  tm.classList.toggle('warn',left<=180&&left>0);tm.classList.toggle('over',left<=0);
+ }
+ function tick(ts){if(!run)return;if(last)left-=(ts-last)/1000;last=ts;show();raf=requestAnimationFrame(tick)}
+ go.addEventListener('click',function(){run=!run;go.textContent=run?'暫停':'繼續';last=0;if(run)raf=requestAnimationFrame(tick);else cancelAnimationFrame(raf)});
+ tm.querySelector('[data-t=reset]').addEventListener('click',function(){run=false;cancelAnimationFrame(raf);left=total;go.textContent='開始';show()});
+}
+buildExam('midterm');buildExam('final');
+
+/* ---------- jumping ---------- */
+document.addEventListener('click',function(e){
+ var b=e.target.closest('[data-go]');
+ if(b){var t=document.getElementById(b.getAttribute('data-go'));if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});return}
+ var j=e.target.closest('[data-jump]');
+ if(j){e.preventDefault();location.hash='tests';setTimeout(function(){var t=document.getElementById(j.getAttribute('data-jump'));if(t)t.scrollIntoView({block:'start'})},30)}
+});
+
+/* ---------- routing ---------- */
+var VIEWS=['overview','midterm','final','tests','course'];
+function route(){
+ var v=(location.hash||'').slice(1); if(VIEWS.indexOf(v)<0)v='overview';
+ VIEWS.forEach(function(n){document.getElementById('v-'+n).hidden=(n!==v)});
+ document.querySelectorAll('.tabs a').forEach(function(a){if(a.dataset.view===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+ window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',route);route();
+
+/* ---------- countdown ---------- */
+(function(){
+ var el=document.getElementById('countdown'), d=new Date(2026,11,15,9,10), now=new Date();
+ var days=Math.ceil((d-now)/86400000);
+ if(days>0&&days<120){el.textContent='距離期末考第一場還有 '+days+' 天';el.hidden=false}
+})();
+
+/* ---------- AA calculator ---------- */
+(function(){
+ var a=document.getElementById('age');
+ function f(){var x=parseFloat(a.value);if(!(x>0)){['aMin','aAvg','aMax','aCm'].forEach(function(i){document.getElementById(i).textContent='—'});return}
+  var mn=15-.25*x,av=18.5-.3*x,mx=25-.4*x;
+  function D(v){return v>0?v.toFixed(2)+' D':'0 D'}
+  document.getElementById('aMin').textContent=D(mn);document.getElementById('aAvg').textContent=D(av);document.getElementById('aMax').textContent=D(mx);
+  document.getElementById('aCm').textContent=av>0?(100/av).toFixed(1)+' cm':'—';}
+ a.addEventListener('input',f);f();
+})();
+
+/* ================= 3D 眼球示意（three.js，捲到才載入） ================= */
+var THREE_URL='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', threeP=null;
+function loadThree(){
+ if(window.THREE)return Promise.resolve(window.THREE);
+ if(threeP)return threeP;
+ threeP=new Promise(function(res,rej){var s=document.createElement('script');s.src=THREE_URL;s.onload=function(){res(window.THREE)};s.onerror=rej;document.head.appendChild(s)});
+ return threeP;
+}
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function EyeRig(stage){
+ var T=window.THREE, self=this;
+ var r=new T.WebGLRenderer({antialias:true,alpha:true});
+ r.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+ r.setClearColor(0x000000,0);
+ stage.insertBefore(r.domElement,stage.firstChild);
+ var sc=new T.Scene(), cam=new T.PerspectiveCamera(30,2,0.1,50);
+ cam.position.set(0,0,5.2);
+ sc.add(new T.HemisphereLight(0xffffff,0x556677,0.95));
+ var dl=new T.DirectionalLight(0xffffff,0.65);dl.position.set(1.5,2.2,4);sc.add(dl);
+ var ringMat=new T.MeshBasicMaterial({color:0x8899a0});
+ function eye(x){
+  var g=new T.Group();g.position.set(x,0,0);
+  g.add(new T.Mesh(new T.SphereGeometry(0.42,48,32),new T.MeshStandardMaterial({color:0xf3f0ea,roughness:0.35})));
+  var iris=new T.Mesh(new T.SphereGeometry(0.4215,48,12,0,Math.PI*2,0,0.5),new T.MeshStandardMaterial({color:0x5a3b25,roughness:0.55}));
+  iris.rotation.x=Math.PI/2;g.add(iris);
+  var pupil=new T.Mesh(new T.SphereGeometry(0.423,32,8,0,Math.PI*2,0,0.21),new T.MeshStandardMaterial({color:0x0b0b0b,roughness:0.15,metalness:0.1}));
+  pupil.rotation.x=Math.PI/2;g.add(pupil);
+  sc.add(g);
+  var ring=new T.Mesh(new T.TorusGeometry(0.5,0.018,8,64),ringMat);ring.position.set(x,0,0.05);sc.add(ring);
+  return {g:g,x:x,yaw:0,pitch:0};
+ }
+ this.OD=eye(-0.62); this.OS=eye(0.62);   // 檢查者視角：受測者右眼在畫面左邊
+ this.target=new T.Vector3(0,0,6);
+ var pen=new T.Mesh(new T.SphereGeometry(0.06,20,14),new T.MeshBasicMaterial({color:0xffd34d}));
+ var halo=new T.Mesh(new T.SphereGeometry(0.11,20,14),new T.MeshBasicMaterial({color:0xffd34d,transparent:true,opacity:0.25}));
+ pen.add(halo);pen.visible=false;sc.add(pen);this.pen=pen;
+ this.markers=[0xd9473b,0x2f7fd0].map(function(c){var m=new T.Mesh(new T.SphereGeometry(0.055,16,12),new T.MeshBasicMaterial({color:c}));m.visible=false;sc.add(m);return m});
+ var occ=new T.Mesh(new T.PlaneGeometry(1.05,1.15),new T.MeshBasicMaterial({color:0x22313a,transparent:true,opacity:0.55,depthWrite:false}));
+ occ.position.set(-3,0,0.8);sc.add(occ);this.occ=occ;this.occX=-3;
+ this.dev={OD:0,OS:0}; this.k=14; this.onFrame=null;
+ function resize(){var w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+ if(window.ResizeObserver)new ResizeObserver(resize).observe(stage); else window.addEventListener('resize',resize);
+ resize();
+ function themeRing(){var c=getComputedStyle(document.documentElement).getPropertyValue('--muted').trim();try{ringMat.color.set(c||'#8899a0')}catch(e){}}
+ themeRing();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',themeRing);
+ new MutationObserver(themeRing).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+ var last=0,visible=false;
+ function aim(e,dt){
+  var dx=self.target.x-e.x, dy=self.target.y, dz=self.target.z;
+  var yaw=Math.atan2(dx,dz), pitch=Math.atan2(dy,Math.sqrt(dx*dx+dz*dz));
+  var side=e===self.OD?-1:1; yaw+=side*self.dev[e===self.OD?'OD':'OS'];
+  var a=1-Math.exp(-self.k*dt);
+  e.yaw+=(yaw-e.yaw)*a; e.pitch+=(pitch-e.pitch)*a;
+  e.g.rotation.set(-e.pitch,e.yaw,0,'YXZ');
+ }
+ function frame(ts){
+  var dt=last?Math.min((ts-last)/1000,0.05):0.016; last=ts;
+  if(self.onFrame)self.onFrame(dt);
+  aim(self.OD,dt);aim(self.OS,dt);
+  self.occX+=(self.occGoal()-self.occX)*(1-Math.exp(-12*dt)); occ.position.x=self.occX;
+  r.render(sc,cam);
+ }
+ this.occSide='none';
+ this.occGoal=function(){return self.occSide==='OD'?self.OD.x:self.occSide==='OS'?self.OS.x:(self.occX<0?-3:3)};
+ var io=new IntersectionObserver(function(es){visible=es[0].isIntersecting;if(visible){last=0;r.setAnimationLoop(frame)}else r.setAnimationLoop(null)});
+ io.observe(stage);
+ var ph=stage.querySelector('.ph');if(ph)ph.remove();
+}
+
+function initEOM(demo,rig){
+ var cap=demo.querySelector('.caption'), btns=demo.querySelectorAll('[data-act]');
+ var X=0.95,Y=0.58,Z=1.7;
+ var P={c:[0,0,'正前方（初始眼位）'],R:[-X,0,'受測者右側'],RU:[-X,Y,'受測者右上'],RD:[-X,-Y,'受測者右下'],L:[X,0,'受測者左側'],LU:[X,Y,'受測者左上'],LD:[X,-Y,'受測者左下'],U:[0,Y,'正上方'],D:[0,-Y,'正下方']};
+ var H=['c','R','RU','RD','R','c','U','D','c','L','LU','LD','L','c'];
+ var mode=null, seg=0, t=0, hold=0;
+ function press(a){btns.forEach(function(b){if(b.hasAttribute('aria-pressed'))b.setAttribute('aria-pressed',b.dataset.act===a?'true':'false')})}
+ function stop(msg){mode=null;rig.pen.visible=false;rig.markers.forEach(function(m){m.visible=false});rig.target.set(0,0,6);press('');if(msg)cap.innerHTML=msg}
+ var SAC=[['1A','1B',[X,0],[-X,0],'左右'],['2A','2B',[0,Y],[0,-Y],'上下'],['3A','3B',[X,Y],[-X,-Y],'左上↔右下'],['4A','4B',[-X,Y],[X,-Y],'右上↔左下']];
+ var sacStep=0,sacT=0;
+ rig.onFrame=function(dt){
+  if(mode==='pursuit'){
+   if(hold>0){hold-=dt;return}
+   var a=P[H[seg]], b=P[H[seg+1]];
+   var dist=Math.hypot(b[0]-a[0],b[1]-a[1])||0.001;
+   t+=dt*(reduce?3:0.75)/dist;
+   if(t>=1){t=0;seg++;hold=reduce?0.6:0.45;cap.innerHTML='筆燈到 <b>'+b[2]+'</b>：觀察平穩、準確、完整、範圍。';if(seg>=H.length-1){stop('9 個注視位置都測過了。記錄：<b>EOM: SAFE</b>（若有問題寫出方向與眼別）。');return}}
+   var p=reduce?(t<1?a:b):[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
+   rig.pen.position.set(p[0],p[1],Z);rig.target.copy(rig.pen.position);
+  } else if(mode==='saccade'){
+   sacT-=dt; if(sacT>0)return;
+   var pair=SAC[Math.floor(sacStep/4)];
+   if(!pair){stop('四組方位都做完了。正常記錄：<b>Saccades: Smooth and Accurate</b>。');return}
+   var ph=sacStep%4;
+   rig.markers[0].position.set(pair[2][0],pair[2][1],Z);rig.markers[1].position.set(pair[3][0],pair[3][1],Z);
+   rig.markers.forEach(function(m){m.visible=true});
+   if(ph===0){rig.target.set(0,0,6);cap.innerHTML='第 '+(Math.floor(sacStep/4)+1)+' 組（'+pair[4]+'）：先注視檢查者的鼻子。'}
+   else if(ph===1){rig.target.set(pair[2][0],pair[2][1],Z);cap.innerHTML='躍視到 <b>'+pair[0]+'</b>（紅筆）。'}
+   else if(ph===2){rig.target.set(pair[3][0],pair[3][1],Z);cap.innerHTML='躍視到 <b>'+pair[1]+'</b>（藍筆）。'}
+   else {rig.target.set(0,0,6);cap.innerHTML='回到正前方。'}
+   sacStep++;sacT=1.1;
+  }
+ };
+ btns.forEach(function(b){b.addEventListener('click',function(){
+  var a=b.dataset.act;
+  if(a==='stop'){stop('已停止。');return}
+  stop();press(a);mode=a;
+  if(a==='pursuit'){rig.k=14;seg=0;t=0;hold=0.3;rig.pen.visible=true;rig.pen.position.set(0,0,Z);rig.target.set(0,0,Z);cap.innerHTML='從<b>正前方（初始眼位）</b>開始，描 H 字走完 9 個方位。'}
+  else {rig.k=32;sacStep=0;sacT=0}
+ })});
+}
+
+function initCover(demo,rig){
+ var cap=demo.querySelector('.caption'), key=document.getElementById('ctKey'), sel=document.getElementById('ctCond');
+ var M=0.24;
+ var COND={
+  ortho:{type:'ortho',key:'正位：遮任何一眼，兩眼都不動；交替遮蓋也不動。記錄 CT ⊕（或 Φ / ɵ）。'},
+  xp:{type:'phoria',dir:1,key:'外斜位 XP：遮蓋-不遮蓋時，未遮眼不動；被遮的眼在遮眼棒後往外漂，移開時<b>向內</b>移回 → phoria。交替遮蓋每次去遮都向內 → 外斜，用 <b>BI</b> 中和。'},
+  ep:{type:'phoria',dir:-1,key:'內斜位 EP：遮蓋時未遮眼不動；移開時被遮眼<b>向外</b>移回 → phoria。交替遮蓋每次去遮都向外 → 內斜，用 <b>BO</b> 中和。'},
+  xt:{type:'tropia',dir:1,eye:'OD',key:'右眼外斜視 RXT：平常右眼偏外。遮左眼時，未遮的右眼<b>向內</b>移去注視 → tropia；移開後左眼再接手、右眼又偏外 → 單側性。用 <b>BI</b> 中和。'},
+  et:{type:'tropia',dir:-1,eye:'OD',key:'右眼內斜視 RET：平常右眼偏內。遮左眼時，右眼<b>向外</b>移去注視 → tropia；移開後回到原狀 → 單側性。用 <b>BO</b> 中和。'}
+ };
+ var cond=COND[sel.value], cover='none', seq=null, seqT=0, seqI=0;
+ rig.target.set(0,0,6); rig.k=9;
+ function devOf(e){
+  if(cond.type==='ortho')return 0;
+  var mag=M*cond.dir;
+  if(cond.type==='phoria')return cover===e?mag:0;
+  var pref=cond.eye==='OD'?'OS':'OD', fix=cover===pref?cond.eye:pref;
+  return e===fix?0:mag;
+ }
+ var NAME={OD:'右眼',OS:'左眼'};
+ function apply(c,silent){
+  var before={OD:devOf('OD'),OS:devOf('OS')}, prev=cover;
+  cover=c; rig.occSide=c;
+  var after={OD:devOf('OD'),OS:devOf('OS')};
+  rig.dev.OD=after.OD; rig.dev.OS=after.OS;
+  if(silent)return;
+  var act=c==='none'?(prev==='none'?'沒有遮蓋':'移開遮眼棒（原本遮'+NAME[prev]+'）'):'遮'+NAME[c]+(prev!=='none'&&prev!==c?'（從'+NAME[prev]+'直接換過來）':'');
+  var seen=[];
+  ['OD','OS'].forEach(function(e){
+   if(e===c)return; // 被遮住的眼看不到
+   var d=after[e]-before[e]; if(Math.abs(d)<1e-6)return;
+   seen.push('<b>'+NAME[e]+(d<0?'向內':'向外')+'移動</b>');
+  });
+  cap.innerHTML=act+'：'+(seen.length?seen.join('、'):'看得到的眼睛<b>不動</b>')+'。';
+ }
+ function setCond(){cond=COND[sel.value];key.innerHTML='判讀重點：'+cond.key;stopSeq();apply('none',true);rig.dev.OD=devOf('OD');rig.dev.OS=devOf('OS');cap.innerHTML='已切換情境。按「播放」或手動遮眼觀察。'}
+ function stopSeq(){seq=null}
+ var CUT=[['OD',2.4],['none',2.2],['OS',2.4],['none',2.2]];
+ var ACT=[['OD',2.2],['OS',2],['OD',2],['OS',2],['none',2]];
+ rig.onFrame=function(dt){
+  if(!seq)return; seqT-=dt; if(seqT>0)return;
+  if(seqI>=seq.length){seq=null;cap.innerHTML+='　<span class="muted">（播放結束）</span>';return}
+  apply(seq[seqI][0]); seqT=seq[seqI][1]*(reduce?1.3:1); seqI++;
+ };
+ sel.addEventListener('change',setCond);
+ demo.querySelectorAll('[data-act]').forEach(function(b){b.addEventListener('click',function(){
+  var a=b.dataset.act;
+  if(a==='cut'||a==='act'){seq=a==='cut'?CUT:ACT;seqI=0;seqT=0;if(cover!=='none')apply('none',true)}
+  else {stopSeq();apply(a)}
+ })});
+ setCond();
+}
+
+document.querySelectorAll('.demo').forEach(function(demo){
+ var stage=demo.querySelector('.stage'), started=false;
+ var io=new IntersectionObserver(function(es){
+  if(!es[0].isIntersecting||started)return; started=true; io.disconnect();
+  loadThree().then(function(){
+   var rig;
+   try{rig=new EyeRig(stage)}catch(err){throw err}
+   if(demo.dataset.demo==='eom')initEOM(demo,rig);else initCover(demo,rig);
+  }).catch(function(){
+   var ph=stage.querySelector('.ph'); if(ph)ph.textContent='這台裝置無法顯示 3D 示意，請直接看下方步驟說明。';
+   demo.querySelector('.ctrl').hidden=true;
+  });
+ },{rootMargin:'200px'});
+ io.observe(stage);
+});
+})();
+</script>
+
+</body>
+</html>
